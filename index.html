@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>28卒就活診断｜明日の『EXHIBITION』あなたに最適な攻略法は？</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background-color: #f3f6fc;
+      color: #1e293b;
+    }
+    .gradient-bg {
+      background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 50%, #0ea5e9 100%);
+    }
+    .premium-gradient {
+      background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);
+    }
+    .fade-in {
+      animation: fadeIn 0.35s ease-out forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4">
+
+  <!-- メインコンテナ（スマホ閲覧に最適な幅） -->
+  <div class="w-full max-w-md bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100">
+
+    <!-- ヘッダーバー -->
+    <header class="gradient-bg text-white px-5 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="bg-white/20 text-xs font-bold px-2.5 py-1 rounded-full tracking-wider">en-courage 28卒</span>
+        <span class="text-xs font-medium text-blue-100">所要時間：約45秒</span>
+      </div>
+      <span class="text-xs font-bold bg-amber-400 text-slate-900 px-2.5 py-0.5 rounded-full">全8問</span>
+    </header>
+
+    <!-- ① スタート画面 -->
+    <div id="start-screen" class="p-6 text-center fade-in">
+      <div class="inline-block bg-rose-100 text-rose-600 text-xs font-extrabold px-3 py-1 rounded-full mb-3">
+        🔥 28卒ラスト開催！イベント直前チェック
+      </div>
+      <h1 class="text-2xl font-black leading-snug text-slate-800 mb-3">
+        今のあなたの就活タイプと<br>
+        <span class="text-blue-600">『EXHIBITION』</span><br>
+        最適攻略ルート診断
+      </h1>
+      <p class="text-sm text-slate-600 leading-relaxed mb-5">
+        年10,000人以上が参加するオンライン選考対策イベント『EXHIBITION Dec.』。<br>
+        8つの質問に答えるだけで、<strong>今のあなたに一番刺さる参加スケジュールと活用法</strong>がわかります！
+      </p>
+
+      <!-- 5つの魅力バッジ -->
+      <div class="space-y-2 text-left mb-6">
+        <!-- プレミアムターム目玉枠 -->
+        <div class="bg-purple-50 p-3 rounded-xl border border-purple-200 flex items-center justify-between">
+          <div>
+            <div class="text-purple-700 font-bold text-xs mb-0.5">👑 11:00〜12:30｜毎回大好評</div>
+            <div class="text-xs font-black text-slate-800">本選考前の必聴『プレミアムターム』</div>
+          </div>
+          <span class="text-[10px] font-extrabold bg-purple-600 text-white px-2 py-1 rounded-lg shrink-0">目玉企画</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div class="bg-blue-50/80 p-3 rounded-xl border border-blue-100">
+            <div class="text-blue-600 font-bold text-xs mb-0.5">⏰ 11:00〜20:00</div>
+            <div class="text-xs font-extrabold text-slate-800">完全【入退出自由】</div>
+          </div>
+          <div class="bg-indigo-50/80 p-3 rounded-xl border border-indigo-100">
+            <div class="text-indigo-600 font-bold text-xs mb-0.5">🤫 13:00〜16:10</div>
+            <div class="text-xs font-extrabold text-slate-800">企業名非公開の選考対策</div>
+          </div>
+          <div class="bg-emerald-50/80 p-3 rounded-xl border border-emerald-100">
+            <div class="text-emerald-600 font-bold text-xs mb-0.5">🏢 外資・日系大手</div>
+            <div class="text-xs font-extrabold text-slate-800">参加企業は続々追加中</div>
+          </div>
+          <div class="bg-amber-50/80 p-3 rounded-xl border border-amber-200">
+            <div class="text-amber-600 font-bold text-xs mb-0.5">🎁 特典第2弾 11/21締切</div>
+            <div class="text-xs font-extrabold text-slate-800">アマギフ2,000円分</div>
+          </div>
+        </div>
+      </div>
+
+      <button onclick="startQuiz()" class="w-full gradient-bg hover:opacity-95 text-white font-bold py-4 px-6 rounded-2xl shadow-lg shadow-blue-500/30 transition transform active:scale-95 text-base">
+        診断をスタートする（無料） 👉
+      </button>
+      <p class="text-[11px] text-slate-400 mt-3">※登録不要ですぐに診断できます</p>
+    </div>
+
+    <!-- ② 質問画面 -->
+    <div id="quiz-screen" class="p-6 hidden">
+      <!-- プログレスバー -->
+      <div class="mb-5">
+        <div class="flex justify-between text-xs font-bold text-slate-500 mb-1.5">
+          <span id="question-number">Q1 / 8</span>
+          <span id="progress-percent">12%</span>
+        </div>
+        <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
+          <div id="progress-bar" class="gradient-bg h-2 rounded-full transition-all duration-300" style="width: 12.5%"></div>
+        </div>
+      </div>
+
+      <!-- 質問テキスト -->
+      <div id="question-container" class="fade-in">
+        <h2 id="question-text" class="text-lg font-extrabold text-slate-800 leading-snug mb-5 min-h-[3.5rem]">
+          質問文がここに入ります
+        </h2>
+
+        <!-- 選択肢 -->
+        <div id="options-container" class="space-y-3">
+          <!-- JSでボタンを生成 -->
+        </div>
+      </div>
+
+      <!-- 戻るボタン -->
+      <div class="mt-6 flex justify-between items-center">
+        <button id="prev-btn" onclick="prevQuestion()" class="text-xs font-bold text-slate-400 hover:text-slate-600 py-2 px-3 hidden">
+          ← 前の質問に戻る
+        </button>
+      </div>
+    </div>
+
+    <!-- ③ 結果画面 -->
+    <div id="result-screen" class="p-6 hidden fade-in">
+      <div class="text-center mb-5">
+        <span class="inline-block bg-blue-100 text-blue-700 text-xs font-extrabold px-3 py-1 rounded-full mb-2">
+          あなたの診断結果
+        </span>
+        <h2 id="result-type-title" class="text-xl font-black text-slate-900 leading-tight mb-2">
+          タイプ名
+        </h2>
+        <p id="result-catchcopy" class="text-xs font-bold text-blue-600">
+          キャッチコピー
+        </p>
+      </div>
+
+      <!-- 診断分析ボックス -->
+      <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200/80 mb-5">
+        <p id="result-description" class="text-sm text-slate-700 leading-relaxed mb-3">
+          分析テキスト
+        </p>
+        <div class="bg-white rounded-xl p-3.5 border border-blue-100">
+          <div class="text-xs font-extrabold text-blue-700 mb-1">💡 あなた専用のEXHIBITION攻略ルート</div>
+          <p id="result-advice" class="text-xs text-slate-700 leading-relaxed font-medium">
+            おすすめルート
+          </p>
+        </div>
+      </div>
+
+      <!-- EXHIBITION 5つの推しポイント再確認 -->
+      <div class="space-y-3 mb-6">
+        <h3 class="text-sm font-black text-slate-800 flex items-center gap-1.5">
+          <span>🔥</span> 明日参加すべき5つの理由
+        </h3>
+
+        <!-- 1. プレミアムターム -->
+        <div class="bg-purple-50/80 border border-purple-200 rounded-xl p-3.5">
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-xs font-black text-purple-900">① 11:00〜12:30 プレミアムターム</span>
+            <span class="text-[10px] font-bold bg-purple-600 text-white px-2 py-0.5 rounded">毎回大好評</span>
+          </div>
+          <p class="text-xs text-slate-700 leading-relaxed">
+            <strong>「本選考前の今だからこそ知っておくべき情報」</strong>を凝縮してお届けする特別企画！毎回満足度が非常に高く、午後の企業ブースを見る解像度が一気に上がります。
+          </p>
+        </div>
+
+        <!-- 2. 入退出自由 -->
+        <div class="bg-blue-50/60 border border-blue-100 rounded-xl p-3.5">
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-xs font-black text-blue-800">② 11:00〜20:00【入退出自由】</span>
+            <span class="text-[10px] font-bold bg-blue-600 text-white px-2 py-0.5 rounded">1コマだけでもOK</span>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            バイトや予定があっても大丈夫！気になる「企業」や「選考対策テーマ」の時間だけピンポイントで参加できます。
+          </p>
+        </div>
+
+        <!-- 3. 企業名非公開 -->
+        <div class="bg-indigo-50/60 border border-indigo-100 rounded-xl p-3.5">
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-xs font-black text-indigo-800">③ 13:00〜16:10 企業名非公開の選考対策</span>
+            <span class="text-[10px] font-bold bg-indigo-600 text-white px-2 py-0.5 rounded">本音トーク</span>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            社名を伏せているからこそ、人気企業の人事が<strong>「実際の選考でどこを見ているか」</strong>を建前なしで解説してくれます。
+          </p>
+        </div>
+
+        <!-- 4. 参加企業・追加予定 -->
+        <div class="bg-emerald-50/60 border border-emerald-100 rounded-xl p-3.5">
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-xs font-black text-emerald-800">④ 外資・日系大手が続々追加予定！</span>
+            <span class="text-[10px] font-bold bg-emerald-600 text-white px-2 py-0.5 rounded">今後も拡大</span>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            三菱UFJ信託銀行、ベイカレント、江崎グリコ、ダイキン工業、JR西日本、レバレジーズなど多数登壇！<strong>今後も注目企業が追加予定</strong>なので、今のうちに枠を確保しよう。
+          </p>
+        </div>
+
+        <!-- 5. 特典 -->
+        <div class="bg-amber-50 border border-amber-300 rounded-xl p-3.5">
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-xs font-black text-amber-900">⑤ 豪華特典：アマギフ2,000円分</span>
+            <span class="text-[10px] font-extrabold bg-rose-500 text-white px-2 py-0.5 rounded">11/21(土)締切</span>
+          </div>
+          <p class="text-xs text-amber-950 leading-relaxed mb-1.5">
+            締切までのエントリー＆当日参加条件クリアで<strong>Amazonギフト券2,000円分</strong>をプレゼント！
+          </p>
+          <p class="text-[10px] text-amber-800 leading-normal bg-white/70 p-2 rounded-lg">
+            ※条件：カメラON参加＋各ブース終了後15分以内のアンケート回答（プレミアムタームのみの参加は出席・1ブースカウント対象外のため、午後のブースも併せて参加しよう！）
+          </p>
+        </div>
+      </div>
+
+      <!-- タイムテーブル簡易表 -->
+      <div class="bg-slate-800 text-white rounded-2xl p-4 mb-6 text-xs">
+        <div class="font-bold text-amber-300 mb-2">🕑 当日のタイムテーブル（入退出自由）</div>
+        <div class="space-y-2">
+          <div class="flex justify-between border-b border-slate-700 pb-1.5">
+            <span class="font-bold text-purple-300">11:00〜12:30</span>
+            <span class="font-bold">プレミアムターム（毎回大好評・必聴講座）</span>
+          </div>
+          <div class="flex justify-between border-b border-slate-700 pb-1.5">
+            <span class="font-bold text-indigo-300">13:00〜16:10</span>
+            <span class="font-bold">選考対策講座ターム（企業名非公開）</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="font-bold text-emerald-300">16:50〜20:00</span>
+            <span class="font-bold">説明会ターム（企業名公開・多数登壇）</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTAボタン（メンター用URL設定箇所） -->
+      <div class="space-y-3">
+        <!-- ▼▼▼ 以下の href="#" を、あなたのエンカレッジ紹介エントリーURLに書き換えてください ▼▼▼ -->
+        <a id="entry-link" href="https://en-courage.com/" target="_blank" rel="noopener noreferrer"
+           class="block w-full text-center gradient-bg hover:opacity-95 text-white font-black py-4 px-5 rounded-2xl shadow-lg shadow-blue-500/30 transition transform active:scale-95 text-base">
+          今すぐEXHIBITIONにエントリーする 🚀
+        </a>
+
+        <div class="bg-rose-50 border border-rose-200 rounded-xl p-3 text-center">
+          <p class="text-[11px] font-bold text-rose-700">
+            ⚠️ エントリー完了後は、案内される【LINEオープンチャット】への入室が必須です！（当日URLはオプチャで案内されます）
+          </p>
+        </div>
+
+        <div class="flex gap-2 pt-2">
+          <button onclick="copyShareText()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 px-4 rounded-xl text-xs transition">
+            📋 結果をコピーしてメンターに送る
+          </button>
+          <button onclick="resetQuiz()" class="bg-slate-100 hover:bg-slate-200 text-slate-500 font-bold py-3 px-4 rounded-xl text-xs transition">
+            やり直す
+          </button>
+        </div>
+        <p id="copy-toast" class="text-center text-xs font-bold text-emerald-600 hidden">
+          ✅ 診断結果をコピーしました！LINEでメンターに送ってみよう！
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="mt-4 text-center text-[11px] text-slate-400">
+    en-courage メンター作成｜28卒ラスト開催 EXHIBITION 活用診断
+  </footer>
+
+  <script>
+    // 8問の質問データ（A: 選考対策重視, B: 業界開拓重視, C: プレミアムターム＆全体像重視, D: 効率・タイパ重視）
+    const questions = [
+      {
+        q: "Q1. 今の就活の進捗に一番近いものはどれ？",
+        options: [
+          { text: "インターンや早期選考を受け始めているが、面接やGDが不安", type: "A" },
+          { text: "見ている業界が偏っていて、他に合う大手・優良企業も知りたい", type: "B" },
+          { text: "本選考前に「今絶対知っておくべき全体戦略」をまず押さえたい", type: "C" },
+          { text: "授業やバイトで忙しいので、効率よく情報と特典をゲットしたい", type: "D" }
+        ]
+      },
+      {
+        q: "Q2. 企業の説明会やイベントに参加するとき、一番気になるのは？",
+        options: [
+          { text: "「結局、選考のどこを見ているの？」という人事の本音", type: "A" },
+          { text: "外資系や日系トップメーカーなど、人気企業のリアルな社風", type: "B" },
+          { text: "毎回大好評の『特別企画（プレミアムターム）』のような濃いインプット", type: "C" },
+          { text: "拘束時間の自由度（必要な部分だけ聞けるかどうか）", type: "D" }
+        ]
+      },
+      {
+        q: "Q3. もし『企業名を隠した状態』で人気企業の人事が選考対策をしてくれたら？",
+        options: [
+          { text: "最高！ブランドへの先入観なしで本質的な選考対策が学べそう", type: "A" },
+          { text: "話が面白かった企業がどこなのか、後から答え合わせしたくなる", type: "B" },
+          { text: "午前中のプレミアムタームで視点を養ってから聞くとさらに深まりそう", type: "C" },
+          { text: "ハズレの企業説明がなさそうで、時間の使い道として賢いと思う", type: "D" }
+        ]
+      },
+      {
+        q: "Q4. 本選考が本格化する前に、一番克服しておきたいことは？",
+        options: [
+          { text: "ES・面接で「他の就活生と差別化できる軸」を作ること", type: "A" },
+          { text: "自分一人では出会えない大手・急成長企業との接点を持つこと", type: "B" },
+          { text: "「28卒の本選考直前に知っておくべき最重要情報」の漏れをなくすこと", type: "C" },
+          { text: "就活にかかる交通費や書籍代などの資金・リソース確保", type: "D" }
+        ]
+      },
+      {
+        q: "Q5. 明日のスケジュール感はどうなりそう？",
+        options: [
+          { text: "午後の選考対策の時間帯（13:00〜16:10）はしっかり確保できそう！", type: "A" },
+          { text: "夕方の企業説明会ラッシュ（16:50〜20:00）なら見られそう！", type: "B" },
+          { text: "11:00〜12:30の『プレミアムターム』からスタートダッシュを切りたい！", type: "C" },
+          { text: "予定の合間に1〜2時間だけならスマホやPCで参加できる！", type: "D" }
+        ]
+      },
+      {
+        q: "Q6. 今回の登壇企業（三菱UFJ信託銀行・ベイカレント・グリコ・ダイキン・JR西日本など）を見てどう思う？",
+        options: [
+          { text: "こういうトップ企業に通る人の思考法・選考基準を知りたい", type: "A" },
+          { text: "普段なら個別で予約するのも大変な企業が一度に見られるのが熱い", type: "B" },
+          { text: "プレミアムタームで土台を作ってから企業ブースを回ると吸収力が違いそう", type: "C" },
+          { text: "今後もさらに企業が追加されるなら、とりあえず枠は押さえておきたい", type: "D" }
+        ]
+      },
+      {
+        q: "Q7. 特典の『Amazonギフト券2,000円分（11/21締切）』についてどう感じる？",
+        options: [
+          { text: "選考対策ができてアマギフまでもらえるなら一石二鳥", type: "A" },
+          { text: "いろんな企業の話を聞いてアンケートに答えるだけでお得すぎる", type: "B" },
+          { text: "プレミアムターム＋午後のブース参加で、学びも特典も両方取りたい！", type: "C" },
+          { text: "正直めちゃくちゃありがたい！条件をクリアして確実にゲットしたい", type: "D" }
+        ]
+      },
+      {
+        q: "Q8. 最後に、今のあなたの気持ちに一番近いスタンプ（言葉）は？",
+        options: [
+          { text: "「本選考で無双するための武器を手に入れたい！」", type: "A" },
+          { text: "「視野を広げて、納得できるファーストキャリアを見つけたい！」", type: "B" },
+          { text: "「毎回大好評のプレミアムタームから、28卒ラスト開催をフル活用したい！」", type: "C" },
+          { text: "「入退出自由なら、空き時間で賢く就活を進めたい！」", type: "D" }
+        ]
+      }
+    ];
+
+    // 4つの診断結果データ
+    const results = {
+      A: {
+        title: "【本選考突破】本質追求タイプ",
+        catchcopy: "小手先のテクニックより「人事の評価基準」を知りたいあなたへ",
+        description: "あなたはすでに就活への意識が高く、「どうすれば選考を通過できるか」を真剣に考えているタイプです。今の時期に必要なのは、ネットに転がっている一般論ではなく、トップ企業の人事が語る『リアルな合格基準』です。",
+        advice: "13:00〜16:10の【企業名非公開・選考対策講座ターム】がドンピシャです！余裕があれば11:00からの【プレミアムターム】も覗くと、午後の選考対策の吸収力がさらに跳ね上がります。"
+      },
+      B: {
+        title: "【視野拡大】隠れ優良・大手ハンタータイプ",
+        catchcopy: "まだ見ぬトップ企業との出会いが、あなたの就活を一気に加速させる！",
+        description: "一つの業界に絞りすぎる前に、外資系や日系大手メーカー・金融・コンサルなど幅広い選択肢を知ることで、志望動機に圧倒的な説得力が生まれるタイプです。",
+        advice: "16:50〜20:00の【説明会ターム（企業名公開）】を中心にチェック！三菱UFJ信託銀行・ベイカレント・グリコ・ダイキン・JR西日本などに加え、今後も企業が追加予定なので見逃し厳禁です。"
+      },
+      C: {
+        title: "【プレミアム攻略】本選考スタートダッシュタイプ",
+        catchcopy: "毎回大好評の『プレミアムターム』で、本選考前の視座を一気に引き上げる！",
+        description: "「本選考前の今だからこそ知っておくべき最重要情報」を最初にインプットすることで、その後の企業選びや選考対策の質を劇的に高められるタイプです。28卒ラスト開催を最も王道かつ強力に使いこなせます！",
+        advice: "まずは11:00〜12:30の【プレミアムターム】から参加しよう！※プレミアムタームのみだと特典の1ブースカウント対象外になるため、そのまま午後の選考対策・説明会ブースも1つ以上参加するのが最強ルートです！"
+      },
+      D: {
+        title: "【タイパ最強】スマート就活攻略タイプ",
+        catchcopy: "入退出自由×アマギフ2,000円分を最も賢く使いこなす戦略家",
+        description: "学業やバイトと両立しながら、無駄なく最大の成果を出したい効率重視のあなた。丸一日拘束されるイベントではなく、自分のスケジュールに合わせてピンポイントで動ける環境が最適です。",
+        advice: "EXHIBITIONは【完全入退出自由】！11:00のプレミアムタームだけ、あるいは空き時間の1コマだけでも参加OKです。11/21(土)締切の特典（アマギフ2,000円分）条件もクリアしてタイパ良く進めましょう！"
+      }
+    };
+
+    let currentStep = 0;
+    let answers = new Array(questions.length).fill(null);
+    let finalType = "C";
+
+    function startQuiz() {
+      document.getElementById("start-screen").classList.add("hidden");
+      document.getElementById("quiz-screen").classList.remove("hidden");
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      const qData = questions[currentStep];
+      document.getElementById("question-number").textContent = `Q${currentStep + 1} / ${questions.length}`;
+      const percent = Math.round(((currentStep + 1) / questions.length) * 100);
+      document.getElementById("progress-percent").textContent = `${percent}%`;
+      document.getElementById("progress-bar").style.width = `${percent}%`;
+
+      const container = document.getElementById("question-container");
+      container.classList.remove("fade-in");
+      void container.offsetWidth;
+      container.classList.add("fade-in");
+
+      document.getElementById("question-text").textContent = qData.q;
+
+      const optionsContainer = document.getElementById("options-container");
+      optionsContainer.innerHTML = "";
+
+      qData.options.forEach((opt) => {
+        const btn = document.createElement("button");
+        const isSelected = answers[currentStep] === opt.type;
+        btn.className = `w-full text-left p-4 rounded-2xl border-2 text-sm font-bold transition duration-150 ${
+          isSelected
+            ? "border-blue-600 bg-blue-50 text-blue-900"
+            : "border-slate-200 hover:border-blue-400 hover:bg-slate-50 text-slate-700"
+        }`;
+        btn.textContent = opt.text;
+        btn.onclick = () => selectOption(opt.type);
+        optionsContainer.appendChild(btn);
+      });
+
+      const prevBtn = document.getElementById("prev-btn");
+      if (currentStep > 0) {
+        prevBtn.classList.remove("hidden");
+      } else {
+        prevBtn.classList.add("hidden");
+      }
+    }
+
+    function selectOption(type) {
+      answers[currentStep] = type;
+      if (currentStep < questions.length - 1) {
+        currentStep++;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function prevQuestion() {
+      if (currentStep > 0) {
+        currentStep--;
+        renderQuestion();
+      }
+    }
+
+    function showResult() {
+      const counts = { A: 0, B: 0, C: 0, D: 0 };
+      answers.forEach(ans => {
+        if (ans) counts[ans]++;
+      });
+
+      finalType = Object.keys(counts).reduce((a, b) => counts[a] >= counts[b] ? a : b);
+      const res = results[finalType];
+
+      document.getElementById("result-type-title").textContent = res.title;
+      document.getElementById("result-catchcopy").textContent = res.catchcopy;
+      document.getElementById("result-description").textContent = res.description;
+      document.getElementById("result-advice").textContent = res.advice;
+
+      document.getElementById("quiz-screen").classList.add("hidden");
+      document.getElementById("result-screen").classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function copyShareText() {
+      const res = results[finalType];
+      const text = `【EXHIBITION 活用診断結果】\n私のタイプは『${res.title}』でした！\n明日のEXHIBITION、プレミアムターム・入退出自由＆アマギフ2,000円分特典もあるみたいなので参加します！`;
+      navigator.clipboard.writeText(text).then(() => {
+        const toast = document.getElementById("copy-toast");
+        toast.classList.remove("hidden");
+        setTimeout(() => toast.classList.add("hidden"), 3500);
+      });
+    }
+
+    function resetQuiz() {
+      currentStep = 0;
+      answers = new Array(questions.length).fill(null);
+      document.getElementById("result-screen").classList.add("hidden");
+      document.getElementById("start-screen").classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  </script>
+</body>
+</html>
